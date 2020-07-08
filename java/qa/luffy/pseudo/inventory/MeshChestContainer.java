@@ -30,13 +30,8 @@ public class MeshChestContainer extends Container {
         this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
         // Main Inventory
-        int startX = 8;
-        int startY = 18;
-        int slotSizePlus2 = 18;
         int xSize = 184;
         int ySize = 276;
-        int texturexSize = 256;
-        int textureySize = 276;
 
         for (int row = 0; row < 9; row++)
         {

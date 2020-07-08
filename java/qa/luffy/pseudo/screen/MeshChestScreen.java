@@ -2,6 +2,7 @@ package qa.luffy.pseudo.screen;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -14,9 +15,8 @@ import qa.luffy.pseudo.inventory.MeshChestContainer;
 @OnlyIn(Dist.CLIENT)
 public class MeshChestScreen extends ContainerScreen<MeshChestContainer>
 {
-    private int textureXSize = 256;
-
-    private int textureYSize = 276;
+    private int xSize = 184;
+    private int ySize = 276;
 
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Pseudo.MODID, "textures/gui/mesh_chest.png");
 
@@ -25,7 +25,12 @@ public class MeshChestScreen extends ContainerScreen<MeshChestContainer>
         super(container, playerInventory, title);
 
         this.passEvents = false;
+        this.guiLeft = 0;
+        this.guiTop = 0;
     }
+
+    public static void blit(AbstractGui object, int xPos, int yPos, int textureX, int textureY, int width, int height) {
+        object.blit(xPos, yPos, textureX, textureY, width, height);}
 
     @Override
     public void render(int mouseX, int mouseY, float partialTicks)
@@ -51,7 +56,7 @@ public class MeshChestScreen extends ContainerScreen<MeshChestContainer>
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
 
-        this.blit(x, y, 0, 0, this.xSize, this.ySize, textureXSize, textureYSize);
+        blit((MeshChestScreen) this, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
     }
 
 }
