@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		"III",
+		"I I",
+		"III"
+	],
+	
+	"key":
+	{
+		"I": { "item": "pseudo:graphene_mesh" }
+	},
+	
+	"result": { "item": "pseudo:mesh_chest" }
+}

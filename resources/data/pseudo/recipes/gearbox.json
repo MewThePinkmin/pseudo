@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		"IP",
+		"MI"
+	],
+	
+	"key":
+	{
+		"M": { "item": "pseudo:graphene_mesh" },
+		"P": { "item": "minecraft:piston" },
+		"I": { "item": "minecraft:iron_nugget" }
+	},
+	
+	"result": { "item": "pseudo:gearbox" }
+}

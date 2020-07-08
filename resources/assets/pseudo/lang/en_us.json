@@ -1,0 +1,17 @@
+{
+	"item.pseudo.graphite": "Graphite",
+	"item.pseudo.graphene_sheet": "Graphene Sheet",
+	"item.pseudo.graphene_mesh": "Graphene Mesh",
+	"item.pseudo.mesh_hardening": "Hardening",
+	"item.pseudo.gearbox": "Gearbox",
+
+	"item.pseudo.digging_mitt": "Digging Mitt",
+	"item.pseudo.mesh_mitt": "Mesh Mitt",
+
+	"block.pseudo.graphite_block": "Graphite Block",
+	"block.pseudo.mesh_block": "Mesh Block",
+	"block.pseudo.mesh_chest": "Mesh Storage Crate",
+	"container.mesh_chest": "Mesh Storage Crate",
+	
+	"itemGroup.pseudo": "Pseudo"
+}

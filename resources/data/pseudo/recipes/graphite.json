@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients": [
+    {
+      "item": "pseudo:graphite_block"
+    }
+  ],
+
+  "result": { "item": "pseudo:graphite", "count": 9}
+}
