@@ -1,64 +1,58 @@
 package qa.luffy.pseudo.inventory;
 
+import java.util.Objects;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
-import qa.luffy.pseudo.block.MeshChestType;
 import qa.luffy.pseudo.setup.Registration;
 import qa.luffy.pseudo.tileentity.MeshChestTileEntity;
 
-import java.util.Objects;
-
 public class MeshChestContainer extends Container {
 
-    private IInventory inventory;
+	private IInventory inventory;
     public final MeshChestTileEntity tileEntity;
     private final IWorldPosCallable canInteractWithCallable;
 
-    public MeshChestContainer(final int windowId, final PlayerInventory playerInventory, IInventory inventory,
-                                 final MeshChestTileEntity tileEntity) {
+    public MeshChestContainer(final int windowId, final PlayerInventory playerInventory, IInventory inventory, final MeshChestTileEntity tileEntity) {
         super(Registration.MESH_CHEST_CONTAINER.get(), windowId);
-        assertInventorySize(tileEntity, 81);
+        assertInventorySize(tileEntity, 84);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
-        // Main Inventory
-        int xSize = 184;
-        int ySize = 276;
-
-        for (int row = 0; row < 9; row++)
-        {
-            for (int meshCol = 0; meshCol < 9; meshCol++)
-            {
-                this.addSlot(new MeshChestSlot(inventory, meshCol + row * 9, 12 + meshCol * 18, 18 + row * 18));
-            }
-        }
-
-        int leftCol = (xSize - 162) / 2 + 1;
-
-        for (int playerInvRow = 0; playerInvRow < 3; playerInvRow++)
-        {
-            for (int playerInvCol = 0; playerInvCol < 9; playerInvCol++)
-            {
-                this.addSlot(new Slot(playerInventory, playerInvCol + playerInvRow * 9 + 9, leftCol + playerInvCol * 18, ySize - (4 - playerInvRow) * 18 - 10));
-            }
-
-        }
-
-        for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++)
-        {
-            this.addSlot(new Slot(playerInventory, hotbarSlot, leftCol + hotbarSlot * 18, ySize - 24));
-        }
+		// chest inv
+		int startX = 8;
+		int startY = 18;
+		int slotSizePlus2 = 18;
+		for (int row = 0; row < 7; ++row) {
+			for (int col = 0; col < 12; ++col) {
+				this.addSlot(new Slot(tileEntity, (row * 12) + col, startX + (col * slotSizePlus2),
+						startY + (row * slotSizePlus2)));
+			}
+		}
+		// player inv
+		startX = 35;
+		int startPlayerInvY = 158;
+		for (int row = 0; row < 3; ++row) {
+			for (int col = 0; col < 9; ++col) {
+				this.addSlot(new Slot(playerInventory, 9 + (row * 9) + col, startX + (col * slotSizePlus2),
+						startPlayerInvY + (row * slotSizePlus2)));
+			}
+		}
+		// hotbar
+		int hotY = 216;
+		for (int col = 0; col < 9; ++col) {
+			this.addSlot(new Slot(playerInventory, col, startX + (col * slotSizePlus2), hotY));
+		}
     }
 
-    private static MeshChestTileEntity getTileEntity(final PlayerInventory playerInventory,
+	private static MeshChestTileEntity getTileEntity(final PlayerInventory playerInventory,
                                                         final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
@@ -81,11 +75,11 @@ public class MeshChestContainer extends Container {
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-            if (index < 81) {
-                if (!this.mergeItemStack(itemstack1, 81, this.inventorySlots.size(), true)) {
+            if (index < 84) {
+                if (!this.mergeItemStack(itemstack1, 84, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, 81, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, 84, false)) {
                 return ItemStack.EMPTY;
             }
 

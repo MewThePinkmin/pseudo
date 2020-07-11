@@ -1,10 +1,11 @@
 package qa.luffy.pseudo.tileentity;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
@@ -16,9 +17,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -29,15 +27,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import qa.luffy.pseudo.block.MeshChestBlock;
-import qa.luffy.pseudo.block.MeshChestType;
 import qa.luffy.pseudo.inventory.MeshChestContainer;
 import qa.luffy.pseudo.setup.Registration;
 
-import javax.annotation.Nonnull;
-import java.util.stream.IntStream;
-
 public class MeshChestTileEntity extends LockableLootTileEntity implements INamedContainerProvider {
-    private NonNullList<ItemStack> chestContents = NonNullList.withSize(81, ItemStack.EMPTY);
+    private NonNullList<ItemStack> chestContents = NonNullList.withSize(84, ItemStack.EMPTY);
     protected int numPlayersUsing;
     private IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
@@ -52,7 +46,7 @@ public class MeshChestTileEntity extends LockableLootTileEntity implements IName
 
     @Override
     public int getSizeInventory() {
-        return 81;
+        return 84;
     }
 
     @Override
@@ -72,7 +66,7 @@ public class MeshChestTileEntity extends LockableLootTileEntity implements IName
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new MeshChestContainer(id, player, new Inventory(81),this);
+        return new MeshChestContainer(id, player, new Inventory(84),this);
     }
 
     @Override
